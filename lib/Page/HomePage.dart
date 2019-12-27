@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterui/Page/ProfilePage.dart';
 import 'package:flutterui/Widget/DayChart.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,6 +10,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int subindex = 1;
+  int mainindex = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +61,27 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Menu(Colors.blueAccent, Colors.white, 'Surfing'),
-                Menu(Colors.white, Colors.black54, 'Snowboard'),
-                Menu(Colors.white, Colors.black54, 'Skiing'),
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      mainindex = 1;
+                    });
+                  },
+                    child: Menu(1, 'Surfing')),
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      mainindex =2;
+                    });
+                  },
+                    child: Menu(2, 'Board')),
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      mainindex =3;
+                    });
+                  },
+                    child: Menu(3, 'Skiing')),
               ],
             ),
             SizedBox(height: MediaQuery.of(context).size.height/50),
@@ -81,22 +101,27 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: MediaQuery.of(context).size.width/30),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          'Profile',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: MediaQuery.of(context).textScaleFactor*25,
-                            fontWeight: FontWeight.w400,
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(right: MediaQuery.of(context).size.width/30),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            'Profile',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: MediaQuery.of(context).textScaleFactor*25,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
-                      ),
-                      Icon(Icons.perm_identity, size: 30,),
-                    ],
+                        Icon(Icons.perm_identity, size: 30,),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -171,26 +196,38 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.amber,
                 borderRadius: BorderRadius.all(Radius.circular(18))
               ),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(
-                          'Rental equipments',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).textScaleFactor*27,
-                            fontWeight: FontWeight.w400
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-
-              ),
+//              child: Column(
+//                children: <Widget>[
+//                  Row(
+//                    children: <Widget>[
+//                      Padding(
+//                        padding: const EdgeInsets.all(20.0),
+//                        child: Text(
+//                          'Rental equipments',
+//                          style: TextStyle(
+//                            color: Colors.white,
+//                            fontSize: MediaQuery.of(context).textScaleFactor*27,
+//                            fontWeight: FontWeight.w400
+//                          ),
+//                        ),
+//                      ),
+//                    ],
+//                  ),
+//                  Container(
+//                    height: MediaQuery.of(context).size.height/8,
+//                      width: MediaQuery.of(context).size.width,
+//                      child: ListView.builder(
+//                        primary: false,
+//                          scrollDirection: Axis.horizontal,
+//                          shrinkWrap: true,
+//                          itemCount: 3,
+//                          itemBuilder: (BuildContext context, int index){
+//                        return ListImage();
+//                      }),
+//
+//                  )
+//                ],
+//              ),
             ),
           ],
         ),
@@ -198,12 +235,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget Menu(Color color1, Color color2, String menuname){
+  Widget ListImage(){
+    return Padding(
+      padding: EdgeInsets.only(left: 20),
+      child: Container(
+        width: MediaQuery.of(context).size.width/3,
+        decoration: BoxDecoration(
+            color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+        ),
+        child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+          child: Image.asset('assets/f1.jpg', fit: BoxFit.cover,),
+        ),
+      ),
+    );
+  }
+
+  Widget Menu(int index, String menuname){
     return Container(
       width: MediaQuery.of(context).size.width/3.5,
       height: MediaQuery.of(context).size.height/18,
       decoration: BoxDecoration(
-          color: color1,
+          color: (index == mainindex)? Colors.blueAccent:Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(15))
       ),
       child: Center(
@@ -211,7 +265,7 @@ class _HomePageState extends State<HomePage> {
           menuname,
           style: TextStyle(
               fontSize: MediaQuery.of(context).textScaleFactor*23,
-              color: color2,
+              color: (index == mainindex)?Colors.white:Colors.black54,
               fontWeight: FontWeight.w400
           ),
         ),
