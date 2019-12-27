@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:math';
 
-import 'package:flutterui/Widget/wave_painter.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -38,7 +37,12 @@ class _ProfilePageState extends State<ProfilePage> {
           Center(
             child: Column(
               children: <Widget>[
-                ProfileCircle(),
+                InkWell(
+                    child: ProfileCircle(),
+                  onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => DD()));
+                  },
+                ),
                 Text(
                   'Sample Name',
                   style: TextStyle(
@@ -46,8 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.white
                   ),
                 ),
-                SizedBox(height: 300,),
-                WaveSlider(),
+                SizedBox(height: 30,),
               ],
             ),
           ),
@@ -120,79 +123,46 @@ class ProfileCircle extends StatelessWidget {
       ),
     );
   }
+
 }
 
-
-class WaveSlider extends StatefulWidget {
-  final double width;
-  final double height;
-  final Color color;
-
-  const WaveSlider({Key key, this.width=350, this.height=50, this.color= Colors.black});
-
-  @override
-  _WaveSliderState createState() => _WaveSliderState();
-}
-
-class _WaveSliderState extends State<WaveSlider> {
-
-  double _dragPosition = 0;
-  double _dragPercentage = 0;
-
-
-
-  void _updateDragPosition(Offset val){
-    double newDragPosition = 0;
-
-    if(val.dx <= 0){
-      newDragPosition = 0;
-    }else if(val.dx >= widget.width){
-      newDragPosition = widget.width;
-    }else{
-      newDragPosition = val.dx;
-    }
-
-
-    setState(() {
-      _dragPosition = newDragPosition;
-      _dragPercentage = _dragPosition / widget.width;
-    });
-  }
-
-  void _onDragUpdate(BuildContext context,DragUpdateDetails update){
-    RenderBox box = context.findRenderObject();
-    Offset offset = box.globalToLocal(update.globalPosition);
-    _updateDragPosition(offset);
-  }
-
-  void _onDragStart(BuildContext context, DragStartDetails start){
-    RenderBox box = context.findRenderObject();
-    Offset offset = box.globalToLocal(start.globalPosition);
-    _updateDragPosition(offset);
-  }
-
-  void _onDragEnd(BuildContext context, DragEndDetails end){
-    setState(() {});
-  }
-
+class DD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        child: Container(
-          width: widget.width,
-          height: widget.height,
-          child: CustomPaint(
-            painter: WavePainter(
-              color: widget.color,
-              dragPercentage: _dragPercentage,
-              sliderPosition: _dragPosition,
-            ),
-          ),
+    return MaterialApp(
+      title: 'Drawing Paths',
+      home: Container(
+        color: Colors.white,
+        child: CustomPaint(
+          painter: CurvePainter(),
         ),
-        onHorizontalDragUpdate: (DragUpdateDetails update)=> _onDragUpdate(context, update),
-        onHorizontalDragStart: (DragStartDetails start)=> _onDragStart(context, start),
-        onHorizontalDragEnd: (DragEndDetails end) => _onDragEnd(context, end),
-      );
+      ),
+    );
   }
 }
 
+class CurvePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.green[800];
+    paint.style = PaintingStyle.fill;
+
+    var path = Path();
+
+    path.moveTo(0, size.height * 0.91);
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.875,
+        size.width * 0.5, size.height * 0.9167);
+    path.quadraticBezierTo(size.width * 0.75, size.height * 0.9584,
+        size.width * 1.0, size.height * 0.9167);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
