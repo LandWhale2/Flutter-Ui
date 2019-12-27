@@ -131,10 +131,25 @@ class DD extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Drawing Paths',
-      home: Container(
-        color: Colors.white,
-        child: CustomPaint(
-          painter: CurvePainter(),
+      home: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(width: 1)
+                ),
+              child: CustomPaint(
+                painter: CurvePainter(),
+              ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -144,22 +159,32 @@ class DD extends StatelessWidget {
 class CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-    paint.color = Colors.green[800];
-    paint.style = PaintingStyle.fill;
+    Paint Rightpaint = Paint()
+      ..color = Colors.red
+      ..strokeCap =StrokeCap.round
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 300
+      ..strokeWidth =2;
 
-    var path = Path();
+    _paintRightLine(canvas, size, Rightpaint);
 
-    path.moveTo(0, size.height * 0.91);
-    path.quadraticBezierTo(size.width * 0.25, size.height * 0.875,
-        size.width * 0.5, size.height * 0.9167);
-    path.quadraticBezierTo(size.width * 0.75, size.height * 0.9584,
-        size.width * 1.0, size.height * 0.9167);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-
-    canvas.drawPath(path, paint);
   }
+
+  _paintRightLine(Canvas canvas, Size size, Paint paint){
+    Offset p1 = Offset(0,0);
+    Offset p2 = Offset(size.width, size.height);
+    canvas.drawLine(p1, p2, paint);
+    print(size.width);
+    print(size.height);
+  }
+
+
+//  _paintLeftLine(Canvas canvas, Size size, Paint paint){
+//    Offset p1 = Offset(0,0);
+//    Offset p2 = Offset(size.width, size.height);
+//    canvas.drawLine(p1, p2, paint);
+//  }
+
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
