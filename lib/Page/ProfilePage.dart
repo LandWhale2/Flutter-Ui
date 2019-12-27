@@ -37,6 +37,14 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               children: <Widget>[
                 ProfileCircle(),
+                Text(
+                  'Sample Name',
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).textScaleFactor*21,
+                    color: Colors.white
+                  ),
+                ),
+
               ],
             ),
           ),
@@ -51,28 +59,61 @@ class ProfileCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width /3,
-      height: MediaQuery.of(context).size.height/3,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Color.fromRGBO(135, 149, 255, 1),
-      ),
-      child: Center(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: ExactAssetImage('assets/g1.jpg'),
-                  fit: BoxFit.fill,
+      width: MediaQuery.of(context).size.width/3,
+      height: MediaQuery.of(context).size.height/6,
+      child: Column(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                width: 140,
+                height:140,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromRGBO(135, 149, 255, 1),
+                ),
+                  child: Stack(
+                    children: <Widget>[
+                      Center(
+                        child: Container(
+                          width: 120,
+                          height: 120,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: ExactAssetImage('assets/g1.jpg'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+              ),
+              Positioned(
+                right: 1,
+                bottom: 1,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 3,color: Color.fromRGBO(135, 149, 255, 1),),
+                      shape: BoxShape.circle,
+                      color: Colors.white
+                  ),
+                  child: Center(
+                    child: Text(
+                      '23',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
