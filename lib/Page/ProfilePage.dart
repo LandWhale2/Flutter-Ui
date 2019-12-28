@@ -176,7 +176,7 @@ class CurvePainter extends CustomPainter {
 
   _paintRightLine(Canvas canvas, Size size, Paint paint){
     Offset p1 = Offset(0,0);
-    Offset p2 = Offset(size.width, size.height);
+    Offset p2 = Offset(size.width/2, size.height/2);
     canvas.drawLine(p1, p2, paint);
     print(size.width);
     print(size.height);
