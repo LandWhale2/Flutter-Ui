@@ -162,11 +162,15 @@ class CurvePainter extends CustomPainter {
     Paint Rightpaint = Paint()
       ..color = Colors.red
       ..strokeCap =StrokeCap.round
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 300
+      ..strokeWidth =2;
+    Paint Leftpaint = Paint()
+      ..color = Colors.red
+      ..strokeCap =StrokeCap.round
       ..strokeWidth =2;
 
     _paintRightLine(canvas, size, Rightpaint);
+    _paintLeftLine(canvas, size, Leftpaint);
+
 
   }
 
@@ -179,11 +183,11 @@ class CurvePainter extends CustomPainter {
   }
 
 
-//  _paintLeftLine(Canvas canvas, Size size, Paint paint){
-//    Offset p1 = Offset(0,0);
-//    Offset p2 = Offset(size.width, size.height);
-//    canvas.drawLine(p1, p2, paint);
-//  }
+  _paintLeftLine(Canvas canvas, Size size, Paint paint){
+    Offset p1 = Offset(size.width, 0);
+    Offset p2 = Offset(size.width/2, size.height/2);
+    canvas.drawLine(p1, p2, paint);
+  }
 
 
   @override
