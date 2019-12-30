@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'dart:ui' as prefix0;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix1;
 import 'package:flutter/scheduler.dart';
+import 'package:flutterui/Widget/ExpenseNote.dart';
 import 'dart:math';
 
 import 'package:flutterui/Widget/RentSurfingChart.dart';
@@ -35,18 +37,19 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 IconButton(
                   icon: Icon(Icons.arrow_back,color: Colors.white,size: 30,),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
                 ),
               ],
             ),
           ),
           Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                InkWell(
-                    child: ProfileCircle(),
-                  onTap: (){
-                  },
-                ),
+                SizedBox(height: MediaQuery.of(context).size.height/30,),
+                ProfileCircle(),
                 Text(
                   'Sample Name',
                   style: TextStyle(
@@ -54,8 +57,49 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.white
                   ),
                 ),
-                SizedBox(height: 30,),
+                Row(
+                  children: <Widget>[
+                    SizedBox(width: MediaQuery.of(context).size.width/20,),
+                    Text(
+                      'Rent surfing',
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).textScaleFactor*35,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white
+                      ),
+                    ),
+                  ],
+                ),
                 SurfingChart(),
+                ExpenseNote(num: 1, title: 'Philippines', subtitle: 'Rent Surfing on Manila',money: 'from \$52.00',),
+                ExpenseNote(num: 2, title: 'Paris', subtitle: 'Rent Surfing on France',money: 'from \$75.00',),
+                Container(
+                  width: MediaQuery.of(context).size.width/1.5,
+                  height: MediaQuery.of(context).size.height/11.4,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                    color: Colors.amber,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      SizedBox(width: MediaQuery.of(context).size.width/30,),
+                      Container(
+                        width: MediaQuery.of(context).size.width/2.3,
+//                        height: MediaQuery.of(context).size.height/11.4,
+                            child: Text(
+                              'See more',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: MediaQuery.of(context).textScaleFactor*30
+                              ),
+                            ),
+
+                      ),
+                      Icon(Icons.play_circle_filled, color: Colors.white, size: 50,),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
