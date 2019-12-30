@@ -11,7 +11,7 @@ class ExpenseNote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width/1.1,
-      height: MediaQuery.of(context).size.height/8,
+      height: MediaQuery.of(context).size.height/7,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -54,7 +54,7 @@ class ExpenseNote extends StatelessWidget {
           ),
           Container(
             width: MediaQuery.of(context).size.width/1.3,
-            height: MediaQuery.of(context).size.height/9,
+            height: MediaQuery.of(context).size.height/7.2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

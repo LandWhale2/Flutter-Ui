@@ -21,89 +21,94 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height/2.5,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(111, 127, 243, 1),
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height/2.5,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(111, 127, 243, 1),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, top: 30),
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.arrow_back,color: Colors.white,size: 30,),
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                SizedBox(height: MediaQuery.of(context).size.height/30,),
-                ProfileCircle(),
-                Text(
-                  'Sample Name',
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).textScaleFactor*21,
-                    color: Colors.white
+            Padding(
+              padding: EdgeInsets.only(left: 10, top: 30),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.arrow_back,color: Colors.white,size: 30,),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                    },
                   ),
-                ),
-                Row(
-                  children: <Widget>[
-                    SizedBox(width: MediaQuery.of(context).size.width/20,),
-                    Text(
-                      'Rent surfing',
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).textScaleFactor*35,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white
-                      ),
+                ],
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  SizedBox(height: MediaQuery.of(context).size.height/30,),
+                  ProfileCircle(),
+                  Text(
+                    'Sample Name',
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).textScaleFactor*21,
+                      color: Colors.white
                     ),
-                  ],
-                ),
-                SurfingChart(),
-                ExpenseNote(num: 1, title: 'Philippines', subtitle: 'Rent Surfing on Manila',money: 'from \$52.00',),
-                ExpenseNote(num: 2, title: 'Paris', subtitle: 'Rent Surfing on France',money: 'from \$75.00',),
-                Container(
-                  width: MediaQuery.of(context).size.width/1.5,
-                  height: MediaQuery.of(context).size.height/11.4,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(35)),
-                    color: Colors.amber,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Row(
                     children: <Widget>[
-                      SizedBox(width: MediaQuery.of(context).size.width/30,),
-                      Container(
-                        width: MediaQuery.of(context).size.width/2.3,
-//                        height: MediaQuery.of(context).size.height/11.4,
-                            child: Text(
-                              'See more',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: MediaQuery.of(context).textScaleFactor*30
-                              ),
-                            ),
-
+                      SizedBox(width: MediaQuery.of(context).size.width/20,),
+                      Text(
+                        'Rent surfing',
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).textScaleFactor*35,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white
+                        ),
                       ),
-                      Icon(Icons.play_circle_filled, color: Colors.white, size: 50,),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(height: MediaQuery.of(context).size.height/40,),
+                  SurfingChart(),
+                  SizedBox(height: MediaQuery.of(context).size.height/40,),
+                  ExpenseNote(num: 1, title: 'Philippines', subtitle: 'Rent Surfing on Manila',money: 'from \$52.00',),
+                  SizedBox(height: MediaQuery.of(context).size.height/40,),
+                  ExpenseNote(num: 2, title: 'Paris', subtitle: 'Rent Surfing on France',money: 'from \$75.00',),
+                  Container(
+                    width: MediaQuery.of(context).size.width/1.5,
+                    height: MediaQuery.of(context).size.height/11.4,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(35)),
+                      color: Colors.amber,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        SizedBox(width: MediaQuery.of(context).size.width/30,),
+                        Container(
+                          width: MediaQuery.of(context).size.width/2.3,
+//                        height: MediaQuery.of(context).size.height/11.4,
+                              child: Text(
+                                'See more',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: MediaQuery.of(context).textScaleFactor*30
+                                ),
+                              ),
+
+                        ),
+                        Icon(Icons.play_circle_filled, color: Colors.white, size: 50,),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -115,14 +120,14 @@ class ProfileCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width/3,
-      height: MediaQuery.of(context).size.height/6,
+      height: MediaQuery.of(context).size.height/5.5,
       child: Column(
         children: <Widget>[
           Stack(
             children: <Widget>[
               Container(
-                width: 140,
-                height:140,
+                width: MediaQuery.of(context).size.width/3,
+                height:MediaQuery.of(context).size.height/6,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color.fromRGBO(135, 149, 255, 1),
@@ -174,5 +179,6 @@ class ProfileCircle extends StatelessWidget {
   }
 
 }
+
 
 
