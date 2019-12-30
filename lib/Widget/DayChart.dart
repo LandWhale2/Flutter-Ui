@@ -31,13 +31,13 @@ class _DayChartState extends State<DayChart> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            daycolumn(context,'Mo', 1),
-            daycolumn(context,'Tu', 4),
-            daycolumn(context,'We', 1.5),
-            daycolumn(context,'Th', 1),
-            daycolumn(context,'Fr', 1.3),
-            daycolumn(context,'Sa', 2),
-            daycolumn(context,'Su', 3),
+            daycolumn(context,'Mo', 50),
+            daycolumn(context,'Tu', 80),
+            daycolumn(context,'We', 30),
+            daycolumn(context,'Th', 60),
+            daycolumn(context,'Fr', 33),
+            daycolumn(context,'Sa', 30),
+            daycolumn(context,'Su', 100),
           ],
         ),
       ),
@@ -70,9 +70,9 @@ class _DayChartState extends State<DayChart> {
             children: <Widget>[
               Container(
                 width: MediaQuery.of(context).size.width/45,
-                height: barHeight/rating,
+                height: barHeight*rating/100,
                 decoration: BoxDecoration(
-                    color: (rating < 2&&rating >1.2)?Colors.amber:(rating ==1)?Colors.red:Colors.green,
+                    color: (rating < 80&&rating >30)?Colors.amber:(rating >=80)?Colors.red:Colors.green,
                     borderRadius: BorderRadius.all(Radius.circular(10))
                 ),
               ),
