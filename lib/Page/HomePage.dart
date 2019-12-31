@@ -11,6 +11,8 @@ class _HomePageState extends State<HomePage> {
 
   int subindex = 1;
   int mainindex = 1;
+  String menutag = 'menutag';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(mainindex: mainindex,)));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: MediaQuery.of(context).size.width/30),
@@ -189,45 +191,16 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SizedBox(height: MediaQuery.of(context).size.height/30,),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height/4,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.all(Radius.circular(18))
+            Hero(
+              tag: 'bottom',
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height/4,
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.all(Radius.circular(18))
+                ),
               ),
-//              child: Column(
-//                children: <Widget>[
-//                  Row(
-//                    children: <Widget>[
-//                      Padding(
-//                        padding: const EdgeInsets.all(20.0),
-//                        child: Text(
-//                          'Rental equipments',
-//                          style: TextStyle(
-//                            color: Colors.white,
-//                            fontSize: MediaQuery.of(context).textScaleFactor*27,
-//                            fontWeight: FontWeight.w400
-//                          ),
-//                        ),
-//                      ),
-//                    ],
-//                  ),
-//                  Container(
-//                    height: MediaQuery.of(context).size.height/8,
-//                      width: MediaQuery.of(context).size.width,
-//                      child: ListView.builder(
-//                        primary: false,
-//                          scrollDirection: Axis.horizontal,
-//                          shrinkWrap: true,
-//                          itemCount: 3,
-//                          itemBuilder: (BuildContext context, int index){
-//                        return ListImage();
-//                      }),
-//
-//                  )
-//                ],
-//              ),
             ),
           ],
         ),
@@ -253,23 +226,26 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget Menu(int index, String menuname){
-    return Container(
-      width: MediaQuery.of(context).size.width/3.5,
-      height: MediaQuery.of(context).size.height/18,
-      decoration: BoxDecoration(
-          color: (index == mainindex)? Colors.blueAccent:Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(15))
-      ),
-      child: Center(
-        child: Text(
-          menuname,
-          style: TextStyle(
-              fontSize: MediaQuery.of(context).textScaleFactor*23,
-              color: (index == mainindex)?Colors.white:Colors.black54,
-              fontWeight: FontWeight.w400
-          ),
-        ),
-      ),
+    return Hero(
+      tag: index.toString(),
+      child: Container(
+              width: MediaQuery.of(context).size.width/3.5,
+              height: MediaQuery.of(context).size.height/18,
+              decoration: BoxDecoration(
+                  color: (index == mainindex)? Colors.blueAccent:Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15))
+              ),
+              child: Center(
+                child: Text(
+                  menuname,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).textScaleFactor*23,
+                      color: (index == mainindex)?Colors.white:Colors.black54,
+                      fontWeight: FontWeight.w400
+                  ),
+                ),
+              ),
+            ),
     );
   }
 
@@ -286,3 +262,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
